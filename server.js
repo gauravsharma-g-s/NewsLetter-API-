@@ -1,10 +1,10 @@
-// Audience Id :  a1533db9bc
-// API Key : d5ca3d5bd4fec9ebfd835949629061df-us21
 const express = require('express')
 const app = express();
 const https = require('https');
 const bodyParser = require('body-parser');
-
+const {API_KEY,AUDIENCE_ID} =  require('./keys')
+const api = process.env.KEY || API_KEY;
+const id  = process.env.ID || AUDIENCE_ID;
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -30,14 +30,15 @@ app.post('/', (req, res) => {
     };
 
     const postData = JSON.stringify(myData);
-    const url = "https://us21.api.mailchimp.com/3.0/lists/a1533db9bc";
+    const url = "https://us8.api.mailchimp.com/3.0/lists/"+id;
+    
     const options = {
         method: "POST",
-        auth: "Gaurav:d5ca3d5bd4fec9ebfd835949629061df-us21"
+        auth: "Gaurav:"+api
     }
 
     const request = https.request(url, options, (response) => {
-     //   console.log(response);
+    
         if(response.statusCode==200){
             res.sendFile(__dirname+"/success.html")
         }
@@ -57,5 +58,5 @@ app.get('/failure',(req,res)=>{
 
 
 app.listen(process.env.PORT || 3500, () => {
-    console.log("Server started on Port 3500");
+    console.log("Server is running");
 })
