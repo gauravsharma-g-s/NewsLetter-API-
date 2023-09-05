@@ -1,5 +1,5 @@
-// Audience Id :  de932a17cb
-// API Key : 437bbca7c3753ba8e54647f8ea3f4046-us21
+// Audience Id :  a1533db9bc
+// API Key : d5ca3d5bd4fec9ebfd835949629061df-us21
 const express = require('express')
 const app = express();
 const https = require('https');
@@ -30,13 +30,14 @@ app.post('/', (req, res) => {
     };
 
     const postData = JSON.stringify(myData);
-    const url = "https://us21.api.mailchimp.com/3.0/lists/de932a17cb";
+    const url = "https://us21.api.mailchimp.com/3.0/lists/a1533db9bc";
     const options = {
         method: "POST",
-        auth: "Gaurav:437bbca7c3753ba8e54647f8ea3f4046-us21"
+        auth: "Gaurav:d5ca3d5bd4fec9ebfd835949629061df-us21"
     }
 
     const request = https.request(url, options, (response) => {
+     //   console.log(response);
         if(response.statusCode==200){
             res.sendFile(__dirname+"/success.html")
         }
